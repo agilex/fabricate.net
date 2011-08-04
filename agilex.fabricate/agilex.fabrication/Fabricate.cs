@@ -32,17 +32,20 @@ namespace agilex.fabrication
 
         static Fabricate()
         {
-            ConfigureAutomapper(new[] {Assembly.GetEntryAssembly()});
+            ConfigureAutomapper(new[] {Assembly.GetCallingAssembly()});
         }
 
         private static void ConfigureAutomapper(Assembly[] assemblies)
         {
             var cBuilder = new ContainerBuilder();
-            cBuilder.RegisterAssemblyTypes(assemblies)
-                .Where(t => t.Name != "Fabricator")
-                .Where(t => t.Name.EndsWith("Fabricator"))
-                .Where(ImplementesFabricatorInterface)
-                .As(t => GetFabricationInterface(t));
+            if (assemblies.Count() > 0 && assemblies[0] != null)
+            {
+                cBuilder.RegisterAssemblyTypes(assemblies)
+                    .Where(t => t.Name.ToLower() != "fabricator")
+                    .Where(t => t.Name.ToLower().EndsWith("fabricator"))
+                    .Where(ImplementesFabricatorInterface)
+                    .As(t => GetFabricationInterface(t));
+            }
             _container = cBuilder.Build();
         }
 
