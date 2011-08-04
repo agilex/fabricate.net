@@ -5,11 +5,19 @@ you often want to construct an object that looks a certain way many times
 
 define the object creation rules in fabricator and allow fabricate to construct you a new object anywhere you require it
 
-// fabricated with custom pre-defined fabricator
-var instanceOfMyClass = Fabricate.InstanceOf<MyClass>();
+// example pre-defined fabricator
+class user_fabricator : Fabricator<User>
+{
+	UpdateFabricationRules(new object[] {Guid.NewGuid()}, user => user.EmailAddress = "email.address@something.com");
+}
+
+// register all your fabricators
+Fabricate.RegisterFabricatorsIn(new []{Assembly.GetAssembly(typeof (user_fabricator))});
+
+// fabricate using pre-defined fabricator
+var user = Fabricate.InstanceOf<User>();
  
-// fabricated with default fabricator constructed on the fly
-var instanceOfDiffClass = Fabricate.InstanceOf<DifferentClass>();
+== Alternatively you can have fabricate construct your objects on the fly according to the parameters you provide
 
 // fabricated using overriden constructor args
 var anotherInstanceOfDiffClass =

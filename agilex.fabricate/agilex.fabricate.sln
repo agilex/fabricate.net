@@ -11,12 +11,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "Cons
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget-packages", "nuget-packages", "{04F09412-960A-4BB9-8D4C-3CC1D5B572DA}"
 	ProjectSection(SolutionItems) = preProject
-		agilex.fabrication\agilex.fabrication.1.0.nupkg = agilex.fabrication\agilex.fabrication.1.0.nupkg
+		..\packages\agilex.fabrication.1.0.0.1.nupkg = ..\packages\agilex.fabrication.1.0.0.1.nupkg
+		..\packages\agilex.fabrication.1.0.nupkg = ..\packages\agilex.fabrication.1.0.nupkg
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget-specs", "nuget-specs", "{91243549-CE3A-4881-88B4-BA5DCAE2CA28}"
 	ProjectSection(SolutionItems) = preProject
 		agilex.fabrication\agilex.fabrication.nuspec = agilex.fabrication\agilex.fabrication.nuspec
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{1F026319-6D65-41D9-B320-B03B88F3520F}"
+	ProjectSection(SolutionItems) = preProject
+		..\readme.markdown = ..\readme.markdown
+		readme.txt = readme.txt
 	EndProjectSection
 EndProject
 Global
