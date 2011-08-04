@@ -3,11 +3,21 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "agilex.fabrication", "agilex.fabrication\agilex.fabrication.csproj", "{60832E33-0A79-4249-8DB6-E08EE0A93482}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "specifications", "specifications", "{23F88D69-07D7-420D-A7E2-517A731F325F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "testing", "testing", "{23F88D69-07D7-420D-A7E2-517A731F325F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "agilex.fabrication.specs", "agilex.fabrication.specs\agilex.fabrication.specs.csproj", "{BE83A888-5937-4DCE-8AC7-627AF7779FB5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{ED7E164D-4DDB-47B7-AA18-C0BB67D5B916}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget-packages", "nuget-packages", "{04F09412-960A-4BB9-8D4C-3CC1D5B572DA}"
+	ProjectSection(SolutionItems) = preProject
+		agilex.fabrication\agilex.fabrication.1.0.nupkg = agilex.fabrication\agilex.fabrication.1.0.nupkg
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nuget-specs", "nuget-specs", "{91243549-CE3A-4881-88B4-BA5DCAE2CA28}"
+	ProjectSection(SolutionItems) = preProject
+		agilex.fabrication\agilex.fabrication.nuspec = agilex.fabrication\agilex.fabrication.nuspec
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

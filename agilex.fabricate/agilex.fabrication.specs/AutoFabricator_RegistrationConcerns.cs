@@ -11,8 +11,7 @@ namespace agilex.fabrication.specs
             // should be populated as per construction registered in Class1Fabricator
             var instanceOfClass2 = Fabricate.InstanceOf<Class2>();
             // should be populated as per construction registered in Class1Fabricator
-
-            var instanceOfClass3 = Fabricate.Instance1<Class1>.With().ConstructorArgs(new object[] {}).;
+            var instanceOfClass3 = Fabricate.InstanceOf<Class1>(new object[] {});
         }
     }
 }

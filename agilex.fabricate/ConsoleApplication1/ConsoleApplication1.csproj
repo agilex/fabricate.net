@@ -47,6 +47,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\agilex.fabrication.specs\agilex.fabrication.specs.csproj">
       <Project>{BE83A888-5937-4DCE-8AC7-627AF7779FB5}</Project>
       <Name>agilex.fabrication.specs</Name>
