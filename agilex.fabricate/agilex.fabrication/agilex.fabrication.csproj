@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefaultFabricator.cs" />
     <Compile Include="Fabricate.cs" />
     <Compile Include="Fabricator.cs" />
     <Compile Include="IFabricator.cs" />

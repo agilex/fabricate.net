@@ -6,19 +6,18 @@ namespace agilex.fabrication
     ///<summary>
     ///  The default fabricator class. Usage:
     ///  1. Inherit from this class to provide registered fabricators for tests.
-    ///  Call UpdateFabricationRules from your class to inform fabricate of 
-    ///  how to construct instances of your class
+    ///  Use the FabricationRules method to configure your fabricator using FabricatorConfig
     ///  2. Use instances of the generic form to fabricate instances or collections. eg.
     ///  MyClass myInstance = new Fabricator<MyClass>().FabricateInstance();    
     ///
-    ///                                       You can optionally provide constructor args and object initialisers to both 
-    ///                                       instance fabrication and collection fabrication
+    ///  You can optionally provide constructor args and object initialisers to both 
+    ///  instance fabrication and collection fabrication
     ///</summary>
     ///<typeparam name = "T">The class you wish to fabricate</typeparam>
     public abstract class Fabricator<T> : IFabricator<T> where T : class
     {
-        object[] _constructorArgs;
         Func<T> _constructionDelegate;
+        object[] _constructorArgs;
         Action<T> _objectInitialiser;
 
         protected Fabricator()
@@ -44,7 +43,7 @@ namespace agilex.fabrication
         /// <returns>Collection of type T</returns>
         public IEnumerable<T> FabricateCollectionOf(int size)
         {
-            return FabricateCollectionOf(size, null);
+            return FabricateCollectionOf(size, null, null);
         }
 
         /// <summary>
@@ -56,6 +55,17 @@ namespace agilex.fabrication
         public IEnumerable<T> FabricateCollectionOf(int size, Action<T, int> collectionObjectInitialiser)
         {
             return FabricateCollectionOf(size, null, collectionObjectInitialiser);
+        }
+
+        /// <summary>
+        ///   Fabricate collection and override the constructor args
+        /// </summary>
+        /// <param name = "size">Size of collection to create</param>
+        /// <param name = "collectionConstructorArgs"></param>
+        /// <returns>Collection of type T</returns>
+        public IEnumerable<T> FabricateCollectionOf(int size, Func<int, object[]> collectionConstructorArgs)
+        {
+            return FabricateCollectionOf(size, collectionConstructorArgs, null);
         }
 
         /// <summary>
@@ -122,6 +132,8 @@ namespace agilex.fabrication
             }
         }
 
+        public abstract void FabricationRules(FabricatorConfig fabricatorConfig);
+
         #endregion
 
         /// <summary>
@@ -156,35 +168,32 @@ namespace agilex.fabrication
         /// <summary>
         ///   Updates the default rules for fabrication of objects of type T
         /// </summary>
-        /// <param name="constructionDelegate"></param>
+        /// <param name = "constructionDelegate"></param>
         public void UpdateFabricationRules(Func<T> constructionDelegate)
         {
             _constructionDelegate = constructionDelegate;
         }
 
+        #region Nested type: FabricatorConfig
+
+        /// <summary>
+        /// The fabrication configuration object, allows the user to configure a fabricator
+        /// Is supplied to you via the FabricationRules abstract method
+        /// </summary>
         public class FabricatorConfig
         {
+            public Action<object[]> SetConstructorArgs;
+            public Action<Func<T>> SetConstructorDelegate;
+            public Action<Action<T>> SetObjectInitializer;
+
             public FabricatorConfig(Fabricator<T> fabricator)
             {
                 SetConstructorArgs = fabricator.UpdateFabricationRules;
                 SetConstructorDelegate = fabricator.UpdateFabricationRules;
                 SetObjectInitializer = fabricator.UpdateFabricationRules;
             }
-
-            public Action<object[]> SetConstructorArgs;
-            public Action<Action<T>> SetObjectInitializer;
-            public Action<Func<T>> SetConstructorDelegate;
         }
 
-        public abstract void FabricationRules(FabricatorConfig fabricatorConfig);
-    }
-
-   
-
-    public class DefaultFabricator<T> : Fabricator<T> where T : class
-    {
-        public override void FabricationRules(FabricatorConfig fabricatorConfig)
-        {
-        }
+        #endregion
     }
 }
