@@ -80,7 +80,7 @@ namespace agilex.fabrication
         {
             IFabricator<TResult> fabricator;
             bool resolved = _container.TryResolve(out fabricator);
-            if (!resolved) fabricator = new Fabricator<TResult>();
+            if (!resolved) fabricator = new DefaultFabricator<TResult>();
 
             try
             {
@@ -102,7 +102,7 @@ namespace agilex.fabrication
         {
             IFabricator<TResult> fabricator;
             bool resolved = _container.TryResolve(out fabricator);
-            if (!resolved) fabricator = new Fabricator<TResult>();
+            if (!resolved) fabricator = new DefaultFabricator<TResult>();
 
             try
             {
@@ -126,7 +126,7 @@ namespace agilex.fabrication
         {
             IFabricator<TResult> fabricator;
             bool resolved = _container.TryResolve(out fabricator);
-            if (!resolved) fabricator = new Fabricator<TResult>();
+            if (!resolved) fabricator = new DefaultFabricator<TResult>();
 
             try
             {
@@ -159,7 +159,7 @@ namespace agilex.fabrication
         {
             ConstructorInfo[] cons =
                 typeof (TResult).GetConstructors(BindingFlags.Public | BindingFlags.Default | BindingFlags.Instance);
-            return cons.Length == 1 ? new Fabricator<TResult>() : null;
+            return cons.Length == 1 ? new DefaultFabricator<TResult>() : null;
         }
 
         public static IEnumerable<TResult> CollectionOf<TResult>(int size, Func<int, Object[]> constructorArgs,
@@ -168,7 +168,7 @@ namespace agilex.fabrication
         {
             IFabricator<TResult> fabricator;
             bool resolved = _container.TryResolve(out fabricator);
-            if (!resolved) fabricator = new Fabricator<TResult>();
+            if (!resolved) fabricator = new DefaultFabricator<TResult>();
 
             try
             {

@@ -15,11 +15,16 @@ namespace agilex.fabrication
     ///                                       instance fabrication and collection fabrication
     ///</summary>
     ///<typeparam name = "T">The class you wish to fabricate</typeparam>
-    public class Fabricator<T> : IFabricator<T> where T : class
+    public abstract class Fabricator<T> : IFabricator<T> where T : class
     {
         object[] _constructorArgs;
         Func<T> _constructionDelegate;
         Action<T> _objectInitialiser;
+
+        protected Fabricator()
+        {
+            FabricationRules(new FabricatorConfig(this));
+        }
 
         #region IFabricator<T> Members
 
@@ -148,7 +153,6 @@ namespace agilex.fabrication
             _constructorArgs = constructorArgs;
         }
 
-
         /// <summary>
         ///   Updates the default rules for fabrication of objects of type T
         /// </summary>
@@ -156,6 +160,31 @@ namespace agilex.fabrication
         public void UpdateFabricationRules(Func<T> constructionDelegate)
         {
             _constructionDelegate = constructionDelegate;
+        }
+
+        public class FabricatorConfig
+        {
+            public FabricatorConfig(Fabricator<T> fabricator)
+            {
+                SetConstructorArgs = fabricator.UpdateFabricationRules;
+                SetConstructorDelegate = fabricator.UpdateFabricationRules;
+                SetObjectInitializer = fabricator.UpdateFabricationRules;
+            }
+
+            public Action<object[]> SetConstructorArgs;
+            public Action<Action<T>> SetObjectInitializer;
+            public Action<Func<T>> SetConstructorDelegate;
+        }
+
+        public abstract void FabricationRules(FabricatorConfig fabricatorConfig);
+    }
+
+   
+
+    public class DefaultFabricator<T> : Fabricator<T> where T : class
+    {
+        public override void FabricationRules(FabricatorConfig fabricatorConfig)
+        {
         }
     }
 }
