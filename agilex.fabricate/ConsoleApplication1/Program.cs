@@ -8,11 +8,7 @@ namespace ConsoleApplication1
     {
         private static void Main(string[] args)
         {
-            Fabricate.RegisterFabricatorsIn(new[] {typeof (Class1).Assembly});
-            var spec1 = new AutoFabricator_RegistrationConcerns();
-
-
-            
+            Fabricate.InstanceOf<Class1>();
 
 
         }

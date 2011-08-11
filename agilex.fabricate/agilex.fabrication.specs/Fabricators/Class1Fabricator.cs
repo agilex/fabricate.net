@@ -6,9 +6,9 @@ namespace agilex.fabrication.specs.Fabricators
     {
         public override void FabricationRules(FabricatorConfig fabricatorConfig)
         {
-            fabricatorConfig.SetConstructorArgs(new object[] {});
-            fabricatorConfig.SetObjectInitializer(newObject => newObject.SettableProperty = "fabricated instance of class 1");
-            fabricatorConfig.SetConstructorDelegate(() => new Class1());
+ //           fabricatorConfig.SetConstructorArgs(new object[] {});
+ //           fabricatorConfig.SetObjectInitializer(newObject => newObject.SettableProperty = "fabricated instance of class 1");
+ //           fabricatorConfig.SetConstructorDelegate(() => new Class1());
         }
     }
 }

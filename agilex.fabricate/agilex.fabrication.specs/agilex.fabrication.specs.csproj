@@ -37,6 +37,9 @@
     <Reference Include="Autofac.Configuration">
       <HintPath>..\packages\Autofac.2.5.1.827\lib\NET40\Autofac.Configuration.dll</HintPath>
     </Reference>
+    <Reference Include="Machine.Specifications">
+      <HintPath>..\packages\Machine.Specifications.0.4.23.0\lib\Machine.Specifications.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,7 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoFabricator_RegistrationConcerns.cs" />
+    <Compile Include="when_fabrciate_initiates.cs" />
     <Compile Include="Fabricators\Class1Fabricator.cs" />
     <Compile Include="Classes\Class1.cs" />
     <Compile Include="Classes\Class2.cs" />
