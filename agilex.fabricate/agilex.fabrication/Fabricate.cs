@@ -36,7 +36,7 @@ namespace agilex.fabrication
 
         static Fabricate()
         {
-            ConfigureAutomapper(new[] {Assembly.GetCallingAssembly()});
+            ConfigureAutomapper(AppDomain.CurrentDomain.GetAssemblies());
         }
 
         static void ConfigureAutomapper(Assembly[] assemblies)

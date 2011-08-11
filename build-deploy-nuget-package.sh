@@ -12,11 +12,18 @@ else
 fi
 
 # update assembly info
-echo "current assembly version"
-grep AssemblyFileVersion agilex.fabricate/agilex.fabrication/Properties/AssemblyInfo.cs
-echo "enter new version number eg. 1.0.5.1"
+currentVersion="`grep AssemblyFileVersion agilex.fabricate/agilex.fabrication/Properties/AssemblyInfo.cs |cut -d '\"' -f2`"
+echo "current assembly version for fabricate.net $currentVersion"
+let patch=`echo $currentVersion | cut -d '.' -f4`+1
+suggestedVersion="`echo $currentVersion | cut -d '.' -f1,2,3`.${patch}"
+echo "enter new version number eg. $suggestedVersion" [Enter to accept]
 read -e newversion
-sed -i -e s/Version\(\"[0-9].[0-9].[0-9].[0-9]\"\)/Version\(\""$newversion"\"\)/ agilex.fabricate/agilex.fabrication/Properties/AssemblyInfo.cs
+if [ "" == "${newversion}" ]
+then
+ newversion=$suggestedVersion
+fi
+echo "Using $newversion"
+sed -i -e s/Version\(\"[0-9]*.[0-9]*.[0-9]*.[0-9]*\"\)/Version\(\""$newversion"\"\)/ agilex.fabricate/agilex.fabrication/Properties/AssemblyInfo.cs
 
 # build package
 nuget.exe pack -Build -OutputDirectory ./packages agilex.fabricate/agilex.fabrication/agilex.fabrication.csproj
