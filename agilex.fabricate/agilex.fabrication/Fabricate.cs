@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using Autofac;
@@ -35,12 +36,30 @@ namespace agilex.fabrication
         static IContainer _container;
 
         static Fabricate()
-        {
-            ConfigureAutomapper(AppDomain.CurrentDomain.GetAssemblies());
+        {            
+            var executingLocation = new FileInfo(Assembly.GetExecutingAssembly().Location);
+            if (executingLocation.Directory != null)
+            {
+                // look for potential unloaded fabricator assemblies in the executing dir
+                var potentialFabricatorAssemblies = executingLocation.Directory.EnumerateFiles().Where(
+                    x =>
+                    (((x.FullName.ToLower().Contains("fabrication")) || (x.FullName.ToLower().Contains("fabricator"))) &&
+                     (x.Extension.ToLower() == ".dll") && (!x.FullName.ToLower().Contains("agilex.fabrication"))));
+
+                // load additional assemblies
+                potentialFabricatorAssemblies.ToList().ForEach(x => Assembly.LoadFile(x.FullName));
+            }
+            
+            // refresh assembly list
+            var assembliesToScan = AppDomain.CurrentDomain.GetAssemblies();
+            
+            // finally configure the container
+            ConfigureAutomapper(assembliesToScan);
         }
 
         static void ConfigureAutomapper(Assembly[] assemblies)
         {
+            
             var cBuilder = new ContainerBuilder();
             if (assemblies.Count() > 0 && assemblies[0] != null)
             {
