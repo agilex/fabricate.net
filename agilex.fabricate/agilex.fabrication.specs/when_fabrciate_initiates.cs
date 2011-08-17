@@ -7,6 +7,6 @@ namespace agilex.fabrication.specs
     public class when_fabrciate_initiates
     {
 
-        It should_be_able_to_fabricate = () => Fabricate.InstanceOf<Class1>();
+        It should_be_able_to_fabricate = () => Fabricate.New<Class1>().Instance();
     }
 }

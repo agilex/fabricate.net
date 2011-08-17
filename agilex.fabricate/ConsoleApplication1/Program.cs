@@ -8,9 +8,7 @@ namespace ConsoleApplication1
     {
         private static void Main(string[] args)
         {
-            Fabricate.InstanceOf<Class1>();
-
-
+            Fabricate.New<Class1>().Instance();
         }
     }
 }

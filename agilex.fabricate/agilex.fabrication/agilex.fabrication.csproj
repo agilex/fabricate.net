@@ -32,7 +32,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Autofac">
-      <HintPath>..\..\..\omigi-cms\packages\Autofac.2.2.4.900\lib\NET40\Autofac.dll</HintPath>
+      <HintPath>..\packages\Autofac.2.2.4.900\lib\NET40\Autofac.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -47,6 +47,7 @@
     <Compile Include="Fabricate.cs" />
     <Compile Include="Fabricator.cs" />
     <Compile Include="IFabricator.cs" />
+    <Compile Include="PostFabrication.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
