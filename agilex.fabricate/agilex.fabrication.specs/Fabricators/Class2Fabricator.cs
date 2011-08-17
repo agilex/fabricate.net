@@ -8,10 +8,10 @@ namespace agilex.fabrication.specs.Fabricators
         {
             fabricatorConfig.SetConstructorArgs(new object[]
                                                     {
-                                                        Fabricate.CollectionOf<Class1>(10,
+                                                        Fabricate.NewCollection<Class1>(10,
                                                                                        (c1, index) =>
                                                                                        c1.SettableProperty =
-                                                                                       string.Format("c2 {0}", index))
+                                                                                       string.Format("c2 {0}", index)).Instance()
                                                     });
         }
     }
